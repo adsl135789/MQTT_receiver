@@ -20,7 +20,7 @@ outputfileList = []
 deveui = ''
 outputfile = ''
 HOST = ""
-PORT = 0
+PORT = 1883
 is_connected = False
 
 
@@ -139,7 +139,7 @@ def on_connect(client, userdata, flags, rc):
     if not is_connected:
         for deveui in deveuiList:
             outputfileList.append(deveui + '_' + time.strftime('%Y%m%d-%H%M', time.localtime(time.time())) + '.txt')
-            outputfile = deveui + '_' + time.strftime('%Y%m%d-%H%M', time.localtime(time.time())) + '.txt'
+            outputfile = deveui + '_' + time.strftime('%Y%m%d-%H%M', time.localtime(time.time())) + '_data.txt'
             fp = open(outputfile, "w")
             fp.write("Connect to MQTT server {}\n".format(HOST))
             sub_topic = "application/1/device/" + deveui + "/#"
