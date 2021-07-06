@@ -193,7 +193,7 @@ def main(argv):
         #     global outputfile
         #     outputfile = arg
         elif opt in ("-f", "--file"):           # read all devices in the file
-            with open(arg + ".txt", "r") as deveui_file:
+            with open(arg, "r") as deveui_file:
                 for line in deveui_file.readlines():
                     deveuiList.append(line.rstrip("\n"))
 
