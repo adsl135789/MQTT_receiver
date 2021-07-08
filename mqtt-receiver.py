@@ -111,12 +111,12 @@ def get_results(dic, devEUI):
           + str_batteryVolt + "," + str_temp + "," + str_value1 + "," + str_value2 + "," + str_serialNo
 
     if check == int(data[44:46], 16):
-        res = open("results.txt", "a")
+        res = open(devEUI + "_results.txt", "a")
         res.write(inf + "\n")
         res.close()
     else:
         print("Data Error\n")
-        res = open("results.txt", "a")
+        res = open(devEUI + "_results.txt", "a")
         res.write("Data %d Error\n" % int_serialNo)
         res.close()
 
@@ -137,8 +137,8 @@ def on_connect(client, userdata, flags, rc):
 
     if not is_connected:
         for deveui in deveuiList:
-            outputfileList.append(deveui + '_' + time.strftime('%Y%m%d-%H%M', time.localtime(time.time())) + '_data.txt')
-            outputfile = deveui + '_' + time.strftime('%Y%m%d-%H%M', time.localtime(time.time())) + '_data.txt'
+            outputfileList.append(deveui + '_data.txt')
+            outputfile = deveui + '_data.txt'
             fp = open(outputfile, "w")
             fp.write("Connect to MQTT server {}\n".format(HOST))
             sub_topic = "application/1/device/" + deveui + "/#"
