@@ -139,7 +139,7 @@ def on_connect(client, userdata, flags, rc):
         for deveui in deveuiList:
             outputfileList.append(deveui + '_data.txt')
             outputfile = deveui + '_data.txt'
-            fp = open(outputfile, "w")
+            fp = open(outputfile, "a")
             fp.write("Connect to MQTT server {}\n".format(HOST))
             sub_topic = "application/1/device/" + deveui + "/#"
             # sub_topic="application/1/device/#"
@@ -164,7 +164,7 @@ def on_message(client, userdata, msg):
     for file in outputfileList:
         if msg_dict["devEUI"] in file:
             break
-    get_results(msg_dict, file.rstrip(".txt"))
+    get_results(msg_dict, msg_dict["devEUI"])
     fp = open(file, "a")
     fp.write(currentTime + ' ')
     fp.write(msg.topic + ": " + msg.payload.decode("utf-8"))
@@ -189,9 +189,6 @@ def main(argv):
             PORT = int(arg)
         elif opt in ("-d", "--deveui"):
             deveuiList.append(arg)
-        # elif opt in ("-o", "--ofile"):
-        #     global outputfile
-        #     outputfile = arg
         elif opt in ("-f", "--file"):           # read all devices in the file
             with open(arg, "r") as deveui_file:
                 for line in deveui_file.readlines():
