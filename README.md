@@ -1,0 +1,1 @@
+使用MQTT接收LoRa Network Server訊號，並分析Senser資料
